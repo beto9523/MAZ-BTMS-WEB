@@ -1,0 +1,51 @@
+.alignitems {
+  display: flex;
+  justify-content: center;
+}
+
+.inputcolorblue {
+  color: blue;
+  font-weight: bolder;
+}
+.inputcolored {
+  color: rgb(0, 0, 0);
+  font-weight: bolder;
+}
+
+.beautify {
+  margin-left: 10px;
+  width: 20%;
+  height: 2px !important;
+  margin-bottom: -20%;
+}
+
+.allignbuttons {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.green-background {
+  background-color: rgb(215, 233, 215);
+}
+.icono-pequeno {
+  width: 24px; 
+  height: 24px; 
+  margin-right: 10px; 
+}
+
+.p-disabled {
+  background-color: #dddddd;
+}
+
+.circle {
+  background: rgb(34, 147, 70);
+  border-radius: 50%;
+  margin-top: 4px;
+  width: 20px;
+  height: 20px;
+}
+
+.sendDown{
+  margin-top: 10%;
+}

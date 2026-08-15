@@ -1,0 +1,140 @@
+
+<form  [formGroup]="testform" autocomplete="off"  >
+    <div class="row mt-3">
+   
+      <div class="col-md-3">
+        <span class="form-title ">Customers</span>        
+     
+
+        <p-autoComplete 
+        [suggestions]="this.filteredCustomers" formControlName="ctrlCustomer"  
+        [dropdown]="true"
+        [forceSelection]="true"
+         (completeMethod)="filterCustomers($event)"
+        (onSelect)="onSelect($event)"
+        placeholder="Select All"
+
+        [style]="{'width':'100%', 'height':'40px'}"
+
+         >
+      
+      </p-autoComplete>
+        
+      </div>
+      
+      <div class="col-md-3">
+   
+        <span class="form-title ">WO (Work order)</span> 
+<div >               
+</div>
+  <p-autoComplete 
+        [suggestions]="this.filteredWO" formControlName="ctrlWO"  
+        class="form-title"
+        [dropdown]="true"
+        [forceSelection]="true"
+        (completeMethod)="filterWO($event)"
+        placeholder="Select All"
+        [style]="{'width':'100%','vertical-align':'top','height':'40px'}"
+         >
+      
+      </p-autoComplete>
+
+
+   
+
+             </div>
+
+
+
+             <div class="col-md-3 ml-1">
+              <span class="form-title ">Date </span>        
+              <p-calendar   selectionMode="range"  dateFormat="mm/dd/yy"
+              [style]="{'width':'100%','height':'40px'}" formControlName="ctrlDate"
+              ></p-calendar>
+
+                   </div>
+
+                   <div class="col-md-3">
+                    <label class="form-title  ">Status</label>
+                  <div></div>
+                   
+                  
+                  <p-dropdown  
+                    [options]="status" formControlName="ctrlStatus"
+                    placeholder="Select All"
+                    autoWidth="false" [style]="{'width':'100%','height':'40px'}"
+                     >
+                  
+                    
+                  </p-dropdown>
+            
+                    
+                  </div>
+
+                   
+
+      </div>
+      <div class="row ">
+
+      
+
+     
+      </div>
+
+
+      <div class="row mt-3">
+       
+
+      <div class="col-md-2">
+        <label class="form-title ">Type</label>
+      
+        <p-dropdown  
+        [options]="type" formControlName="ctrlType"
+        placeholder="Select a All"
+        autoWidth="false" [style]="{'width':'100%','vertical-align':'top','height':'40px'}"
+         >
+
+        </p-dropdown>
+
+      </div>
+
+      
+      <div class="col-md-2">
+        <label class="form-title " >Method</label>
+
+        <p-dropdown  
+        [options]="method" formControlName="ctrlMethod"
+        
+        autoWidth="false" [style]="{'width':'100%','vertical-align':'top','height':'40px'}"
+         >
+
+        </p-dropdown>
+
+      </div>
+
+      <div class="col-md-2">
+        <label for="" class="form-title ">Geometry</label>
+        <p-dropdown 
+        inputId=""  
+        [options]="geometry" formControlName="ctrlGeometry"
+        autoWidth="false" [style]="{'width':'100%','vertical-align':'top','height':'40px'}"
+         >
+
+        </p-dropdown>
+      </div>
+      <div class="col-md-2"  style="display: flex; align-items: center;padding-top: 20px;">
+        <button class="btn btn-primary btn-block "  (click)="onShowTotales()" >
+          SUBMIT
+        </button>
+    </div>
+   
+    <div *ngIf="showExport==true" class="col-md-2"  style="display: flex; align-items: center;padding-top: 20px;">
+      <button class="btn btn-secondary btn-success "  (click)="exportFilter()" >
+        Export Work Order
+      </button>
+  </div>
+
+  </div>
+</form>
+  
+    

@@ -1,0 +1,294 @@
+<ng-template #content let-modal>
+  <div class="modal-header d-flex justify-content-center">
+    <h4 class="modal-title" id="user-modal">{{ this.title }}</h4>
+  </div>
+  <form [formGroup]="woForm" (ngSubmit)="onFormSubmit()">
+    <div class="modal-body">
+      <div class="mb-3">
+        <div class="row mt-3">
+          <!--///////************FORM FIELD: PWO************//////   -->
+          <div class="col-md-3">
+            <span
+              class="form-title"
+              [ngClass]="{ required: this.checkRequired('woNumber') }"
+              >PWO</span
+            >
+            <input
+              placeholder="Enter PWO"
+              type="text"
+              formControlName="woNumber"
+              class="p-inputtext-sm"
+              maxlength="100"
+              pInputText
+            />
+
+            <p class="position-relative">
+              <p-message
+                severity="error"
+                *ngIf="
+                  woForm.get('woNumber')?.hasError('required') &&
+                  woForm.get('woNumber')?.touched
+                "
+                text="PWO is required"
+              >
+              </p-message>
+            </p>
+          </div>
+
+          <!--///////************FORM FIELD: Serial************//////   -->
+          <div class="col-md-3">
+            <span
+              class="form-title"
+              [ngClass]="{ required: this.checkRequired('serial') }"
+              >S/N</span
+            >
+            <input
+              placeholder="Enter serial"
+              type="text"
+              formControlName="serial"
+              class="p-inputtext-sm"
+              maxlength="100"
+              pInputText
+            />
+
+            <p class="position-relative">
+              <p-message
+                severity="error"
+                *ngIf="
+                  woForm.get('serial')?.hasError('required') &&
+                  woForm.get('serial')?.touched
+                "
+                text="Serial is required"
+              >
+              </p-message>
+            </p>
+          </div>
+
+          <!--///////************FORM FIELD: Customer Name************//////   -->
+          <div class="col-md-6">
+            <span
+              class="form-title"
+              [ngClass]="{ required: this.checkRequired('customerName') }"
+              >Customer Name</span
+            >
+            
+            <p-autoComplete
+            class="p-inputtext-md"
+            [suggestions]="this.customerallvaluesTemp"
+            (change)="changeCustomer($event)"
+            (onSelect)="onSelectCustomer($event)"
+            [forceSelection]="true"
+            formControlName="customerName"
+            placeholder="Select Customer"
+            [dropdown]="true"
+            (completeMethod)="filterCustomer($event)"
+            [style]="{ width: '100%', height: '38px', border: '10px' }"
+          >
+          </p-autoComplete>
+
+            <p class="position-relative">
+              <p-message
+                severity="error"
+                *ngIf="
+                  woForm.get('customerName')?.hasError('required') &&
+                  woForm.get('customerName')?.touched
+                "
+                text="Customer Name is required"
+              >
+              </p-message>
+            </p>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <!--///////************FORM FIELD: Item************//////   -->
+          <div class="col-md-3">
+            <span
+              class="form-title"
+              [ngClass]="{ required: this.checkRequired('item') }"
+              >Item</span
+            >
+            <input
+              placeholder="Enter item"
+              type="text"
+              formControlName="item"
+              class="p-inputtext-sm"
+              maxlength="100"
+              pInputText
+            />
+
+            <p class="position-relative">
+              <p-message
+                severity="error"
+                *ngIf="
+                  woForm.get('item')?.hasError('required') &&
+                  woForm.get('item')?.touched
+                "
+                text="Item is required"
+              >
+              </p-message>
+            </p>
+          </div>
+
+          <div class="col-md-3">
+            <span
+              class="form-title"
+              [ngClass]="{ required: this.checkRequired('poNumber') }"
+              >PO</span
+            >
+            <input
+              placeholder="Enter PO"
+              type="text"
+              formControlName="poNumber"
+              class="p-inputtext-sm"
+              maxlength="100"
+              pInputText
+            />
+
+            <p class="position-relative">
+              <p-message
+                severity="error"
+                *ngIf="
+                  woForm.get('poNumber')?.hasError('required') &&
+                  woForm.get('poNumber')?.touched
+                "
+                text="PO is required"
+              >
+              </p-message>
+            </p>
+          </div>
+
+          <!--///////************FORM FIELD: chain************//////   -->
+          <div class="col-md-2">
+            <span
+              class="form-title"
+              [ngClass]="{ required: this.checkRequired('chain') }"
+              >Chain</span
+            >
+            <input
+              type="text"
+              formControlName="chain"
+              class="p-inputtext-sm"
+              maxlength="100"
+              pInputText
+            />
+            <p class="position-relative">
+              <p-message
+                severity="error"
+                *ngIf="
+                  woForm.get('chain')?.hasError('required') &&
+                  woForm.get('chain')?.touched
+                "
+                text="Chain is required"
+              >
+              </p-message>
+            </p>
+          </div>
+
+          <!--///////************FORM FIELD: Wll************//////   -->
+          <div class="col-md-2">
+            <span
+              class="form-title"
+              [ngClass]="{ required: this.checkRequired('wll') }"
+              >WLL</span
+            >
+            <input
+              placeholder="Wll"
+              type="number"
+              formControlName="wll"
+              class="p-inputtext-sm"
+              maxlength="100"
+              pInputText
+            />
+
+            <p class="position-relative">
+              <p-message
+                severity="error"
+                *ngIf="
+                  woForm.get('wll')?.hasError('required') &&
+                  woForm.get('wll')?.touched
+                "
+                text="Wll is required"
+              >
+              </p-message>
+            </p>
+          </div>
+
+          <!--///////************FORM FIELD: Serial************//////   -->
+          <div class="col-md-2">
+            <span
+              class="form-title"
+              [ngClass]="{ required: this.checkRequired('legs') }"
+              >Legs</span
+            >
+            <input
+              placeholder="Enter Legs"
+              type="number"
+              formControlName="legs"
+              class="p-inputtext-sm"
+              maxlength="100"
+              pInputText
+            />
+
+            <p class="position-relative">
+              <p-message
+                severity="error"
+                *ngIf="
+                  woForm.get('legs')?.hasError('required') &&
+                  woForm.get('legs')?.touched
+                "
+                text="Legs is required"
+              >
+              </p-message>
+            </p>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <!--///////************FORM FIELD: Item Description************//////   -->
+          <div class="col-md-12">
+            <span
+              class="form-title"
+              [ngClass]="{ required: this.checkRequired('descriptionItem') }"
+              >Item Descrption</span
+            >
+            <input
+              placeholder="Enter item description"
+              type="text"
+              formControlName="descriptionItem"
+              class="p-inputtext-sm"
+              maxlength="100"
+              pInputText
+            />
+
+            <p class="position-relative">
+              <p-message
+                severity="error"
+                *ngIf="
+                  woForm.get('descriptionItem')?.hasError('required') &&
+                  woForm.get('descriptionItem')?.touched
+                "
+                text="Item description is required"
+              >
+              </p-message>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-primary" type="submit">
+        {{ this.title }}
+      </button>
+      <button
+        ngbAutofocus
+        type="button"
+        class="btn btn-secondary"
+        (click)="modal.close('Save click')"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</ng-template>

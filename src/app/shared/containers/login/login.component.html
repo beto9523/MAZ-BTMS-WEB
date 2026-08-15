@@ -1,0 +1,76 @@
+<div id="wrapper">
+  <!-- Left navigation bar -->
+  <navigation></navigation>
+
+  <!-- Main page wrapper -->
+  <div id="page-wrapper" class="gray-bg">
+    <!-- Top navigation -->
+    <topnavbar></topnavbar>
+
+    <div
+      class="row wrapper border-bottom white-bg page-heading breadcrumb-div d-flex align-items-center"
+    >
+      <div class="col-lg-10">
+        <h2>{{ title }}</h2>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active">
+            <a routerLink="/Login">Home</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight login-image">
+      <br />
+
+      <div class="row justify-content-center">
+        <div class="col-lg-12">
+          <div class="text-center">
+            <img class="logo" src="{{ 'assets/img/logo.png' }}" />
+          </div>
+        </div>
+        <div class="col-lg-4 col-lg-push-4 mt-3">
+          <div class="text-center loginscreen"></div>
+          <br />
+
+          <h3 *ngIf="loggedIn" class="text-center">Welcome</h3>
+
+          <div *ngIf="!loggedIn">
+            <p>Login to the System</p>
+
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class="row mb-2">
+                <div class="col-md-12">
+                  <!-- <span class="form-title">User Name</span> -->
+                  <input id="username" placeholder="Username" type="text" formControlName="username" pInputText />
+                  <p class="position-relative">
+                  <p-message severity="error" text="Username is required" *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+                  </p-message>
+                  </p>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-12">
+                  <!-- <span class="form-title">Password</span> -->
+                  <input id="password" type="Password" placeholder="Password" text="Password is required" formControlName="password" pInputText />
+                  <p class="position-relative">
+                  <p-message severity="error" text="Password is required" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                  >
+                  </p-message>
+                  </p>
+                </div>
+              </div>
+
+              <button class="btn btn-primary block full-width m-b" type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer></footer>
+    </div>
+    <!-- End page wrapper-->
+  </div>
+  <!-- End wrapper-->
+</div>

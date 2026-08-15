@@ -1,0 +1,24 @@
+.clase1{
+    height: 1px;
+}
+.p-element p-ripple p-autocomplete-dropdown p-button-icon-only p-button p-component ng-star-inserted{
+    height: 1px!important;
+}
+#clase1{
+    height: 1px;
+
+}
+
+.p-button{
+    background-color: white;
+    color: black;
+    border-radius: 3px;
+    border-color:#dee2e6;
+    border-left-style: none;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    margin-left: -10px;
+}
+p-dropdown div{
+    align-items: center;
+}

@@ -1,0 +1,367 @@
+<div class="row">
+  <div class="col-md-8">
+    <form [formGroup]="testForm" (ngSubmit)="onFormSubmit()">
+      <div class="row">
+        <div class="col-md-3 col align-self-end form-title">
+        <span class="form-title" 
+        [ngClass]="{ required: this.checkRequired('pwo') }"
+        >
+          PWO
+        </span>
+          <p-autoComplete
+            class="p-inputtext-md"
+            [suggestions]="this.pwoallvaluesTemp"
+            (change)="changePWO($event)"
+            (onSelect)="onSelectPWO($event)"
+            [disabled]="disabled"
+            [forceSelection]="true"
+            formControlName="pwo"
+            placeholder="select PWO"
+            [dropdown]="true"
+            (completeMethod)="filterPWO($event)"
+            [style]="{ width: '100%', height: '40px', border: '10px' }"
+          >
+          </p-autoComplete>
+          <p class="position-relative">
+            <p-message
+              severity="error"
+              *ngIf="
+                testForm.get('pwo')?.hasError('required') &&
+                testForm.get('pwo')?.touched
+              "
+              text="PWO is required"
+            >
+            </p-message>
+          </p>
+        </div>
+        <div class="col-md-3 col align-self-end form-title">
+          <span class="form-title"  [ngClass]="{ required: this.checkRequired('ctrl_WO') }">
+            Serial Number
+          </span>
+          <p-autoComplete
+            class="p-inputtext-md"
+            [suggestions]="this.serialnumbers"
+            [dropdown]="true"
+            [disabled]="disabled"
+            (change)="changeSerial($event)"
+            (onSelect)="onSelectSerial($event)"
+            [forceSelection]="true"
+            placeholder="select serial #"
+            (completeMethod)="filterSerialNumbers($event)"
+            formControlName="ctrl_WO"
+            [style]="{ width: '100%', height: '40px', border: '10px' }"
+          >
+          </p-autoComplete>
+          <p class="position-relative">
+          <p-message
+          severity="error"
+          *ngIf="
+            testForm.get('ctrl_WO')?.hasError('required') &&
+            testForm.get('ctrl_WO')?.touched
+          "
+          text="Serial Number is required"
+        >
+        </p-message>
+      </p>
+
+      </div>
+        <div class="col-sm-3 col align-self-start custom-disabled-input">
+          <span class="form-title">Item</span>
+          <input
+            type="text"
+            formControlName="item"
+            [ngClass]="{ 'p-disabled': true }"
+            class="p-inputtext-sm"
+            pInputText
+            readonly
+          />
+        </div>
+
+        <div class="col-md-3">
+          <span class="form-title">Cust PO</span>
+          <input
+            type="text"
+            formControlName="custpo"
+            class="p-inputtext-sm"
+            pInputText
+            [ngClass]="{ 'p-disabled': true }"
+            readonly
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <span class="form-title">Description</span>
+          <input
+            placeholder=""
+            type="text"
+            formControlName="Description"
+            class="p-inputtext-sm"
+            pInputText
+            [ngClass]="{ 'p-disabled': true }"
+            readonly
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <span class="form-title col align-self-start">Operator</span>
+          <input
+            maxlength="255"
+            type="text"
+            formControlName="Operator"
+            class="p-inputtext-sm"
+            [ngClass]="{ 'p-disabled': true }"
+            readonly
+            pInputText
+          />
+        </div>
+        <div class="col-md-2">
+          <span class="form-title">Chain</span>
+          <input
+            type="text"
+            class="p-inputtext-sm"
+            maxlength="50"
+            formControlName="chain"
+            pInputText
+            [ngClass]="{ 'p-disabled': true }"
+            readonly
+          />
+        </div>
+        <div class="col-md-2">
+          <span class="form-title">Legs</span>
+          <input
+            type="text"
+            class="p-inputtext-sm"
+            [ngClass]="{ 'p-disabled': true }"
+            maxlength="50"
+            formControlName="legs"
+            pInputText
+            readonly
+          />
+        </div>
+        <div class="col-md-2">
+          <span class="form-title">WLL</span>
+          <input
+            placeholder=""
+            [ngClass]="{ 'p-disabled': true }"
+            type="text"
+            formControlName="wll"
+            class="p-inputtext-sm"
+            pInputText
+            readonly
+          />
+        </div>
+        <div class="col-md-2 col align-self-start required">
+          <span
+            class="form-title"
+            [ngClass]="{ required: this.checkRequired('target') }"
+            >Target</span
+          >
+          <input
+            min="0"
+            [ngClass]="{ 'p-disabled': disabled }"
+            type="number"
+            formControlName="target"
+            class="p-inputtext-sm"
+            pInputText
+          />
+
+          <p class="position-relative">
+            <p-message
+              severity="error"
+              *ngIf="
+                testForm.get('target')?.hasError('required') &&
+                testForm.get('target')?.touched
+              "
+              text="Target is required"
+            >
+            </p-message>
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4 col align-self-start required">
+          <span class="form-title"         [ngClass]="{ required: this.checkRequired('testype') }">
+          Test Type
+          </span>
+           <input
+              formControlName="testype"
+              type="text"
+              class="p-inputtext-sm"
+              maxlength="50"
+              pInputText
+              [ngClass]="{ required: this.checkRequired('testype') }"
+              value="{{this.testsetup.nametestype}}"
+              [ngClass]="{ 'p-disabled': true }"
+              readonly
+            />
+        </div>
+        
+        <div class="col-sm-4 col align-self-start required">
+          <span class="form-title"         [ngClass]="{ required: this.checkRequired('method') }">
+Method          </span>
+            <input
+              placeholder=""
+              type="text"
+              formControlName="method"
+              class="p-inputtext-sm"
+              [ngClass]="{ 'p-disabled': true }"
+              maxlength="50"
+              value="{{this.testsetup.namemethod}}"
+              readonly
+              pInputText
+            />
+        </div>
+        <div class="col-sm-4 col align-self-start required">
+          <span class="form-title"         [ngClass]="{ required: this.checkRequired('geometry') }">
+Geometry          </span>
+            <input
+              placeholder=""
+              type="text"
+              formControlName="geometry"
+              class="p-inputtext-sm"
+              [ngClass]="{ 'p-disabled': true }"
+              maxlength="50"
+              pInputText
+              value="{{this.testsetup.namegeometry}}"
+              readonly
+            />
+        </div>
+      </div>
+
+      <div *ngIf="flag == false" class="row">
+        <div class="col-sm-12 col align-self-start">
+          <p class="form-title">
+            Customer Name<input
+              placeholder=""
+              type="text"
+              formControlName="name_customer"
+              class="p-inputtext-sm"
+              [ngClass]="{ 'p-disabled': true }"
+              maxlength="50"
+              readonly
+              pInputText
+            />
+          </p>
+        </div>
+
+        <div class="col-sm-12 col align-self-start">
+          <p class="form-title">
+            Notes<input
+              placeholder=""
+              type="text"
+              [ngClass]="{ 'p-disabled': disabled }"
+              formControlName="notes"
+              class="p-inputtext-sm"
+              pInputText
+            />
+          </p>
+        </div>
+        <div class="col-sm-12 col align-self-start">
+          <p class="form-title">
+            Notes OFF
+            <input
+            [ngClass]="{ 'p-disabled': disabled }"
+              type="text"
+              formControlName="notesoff"
+              class="p-inputtext-sm"
+              maxlength="50"
+              pInputText
+            />
+          </p>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="col-md-4 divseparatormargintop">
+    <div class="Container allignbuttons">
+      <button
+        class="btn btn-primary col-sm-3"
+        [swal]="{
+          title: 'CLEAN FORM',
+          text: 'Are you sure you want to clean the form? ',
+          confirmButtonColor: 'rgb(105 196 238)',
+          confirmButtonText: 'Confirm',
+          icon: 'warning',
+          showCancelButton: true,
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          focusCancel: true
+        }"
+        (confirm)="setFormValues()"
+        (confirm)="this.modalTest.CleaningRadios()"
+        
+      >
+        CLEAN</button
+      >  
+      <button (click)="getValuesFromPWO(PWO.pwoname)" class="btn btn-primary col-sm-7"
+      [disabled]="disabled"
+      >
+        GET PWO
+      </button>
+    </div>
+    <button
+    [disabled]="disabled"
+      (click)="getModal()"
+      class="btn btn-primary col-sm-5 separator-left"
+    >
+      TEST SETUP
+    </button>
+
+    <button
+      (click)="onFormSubmit()"
+      class="btn btn-primary col-sm-5 divseparatormargintop"
+      [disabled]="disabled"
+    >
+      START LOADING
+    </button>
+
+    <div class="">
+      <div>
+        <div *ngFor="let category of categories">
+          <br />
+          <p-radioButton
+            [inputId]="category.key"
+            name="category"
+            [value]="category"
+            [(ngModel)]="selectedCategory"
+            [(ngModel)]="selectedValue"
+            (ngModelChange)="onRadioButtonChange($event)"
+          ></p-radioButton>
+          <label
+            [for]="category.key"
+            class="ml-2 p-field-checkbox labelseparator"
+            >{{ category.name }}</label
+          ><br />
+        </div>
+        <br />
+        <button
+          class="btn btn-primary col-sm-1"
+          *ngIf="flag == false"
+          (click)="verifyflag()"
+        >
+          ▼
+        </button>
+        <button
+          class="btn btn-primary col-sm-1"
+          *ngIf="flag == true"
+          (click)="verifyflag()"
+        >
+          ▲
+        </button>
+
+        <br />
+        <br />
+      </div>
+    </div>
+  </div>
+
+  <app-modalscreen
+    (sendCheckBoxForTestType)="sendCheckBoxForTestType($event)"
+    (sendCheckBoxForMethod)="sendCheckBoxForMethod($event)"
+    (sendCheckBoxForGeometry)="sendCheckBoxForGeometry($event)"
+  ></app-modalscreen>
+</div>

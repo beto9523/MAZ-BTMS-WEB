@@ -1,0 +1,52 @@
+
+<app-breadcrumb-header [title]="'Test Dashboard'" > </app-breadcrumb-header>
+  
+<div class="wrapper wrapper-content animated fadeInRight principalmenu">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                    </div>
+                    <app-filtrostest (showTotales)="showTotalesProcess($event)"></app-filtrostest>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  
+<div class="wrapper wrapper-content animated fadeInRight principalmenu">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content"  style="padding-bottom: 0px">
+                    <div class="row">
+                    </div>
+                    <app-totalestest></app-totalestest>
+
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+  
+<div class="wrapper wrapper-content animated fadeInRight principalmenu">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                    </div>
+                    <app-tabletest> </app-tabletest>
+
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+

@@ -1,0 +1,157 @@
+<form [formGroup]="userForm" autocomplete="off" (ngSubmit)="onFormSubmit()">
+  <div class="row">
+    <div class="col-md-4">
+      <span class="form-title ">User Name</span>
+      <input
+        placeholder="Enter a username"
+        type="text"
+        formControlName="userName"
+        class="p-inputtext-sm"
+        maxlength="50"
+        pInputText
+      />
+    </div>
+
+    <div class="col-md-4">
+      <span class="form-title ">Email</span>
+      <input
+        placeholder="Enter email"
+        type="text"
+        formControlName="email"
+        class="p-inputtext-sm"
+        maxlength="100"
+        pInputText
+      />
+    </div>
+    <div class="col-md-4">
+      <span class="form-title ">Modified Date</span>
+      <p-calendar   formControlName="modifiedDate" dateFormat="mm/dd/yy"></p-calendar>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-4">
+      <span class="form-title">Name</span>
+      <input
+        placeholder="Enter a name"
+        type="text"
+        formControlName="name"
+        class="p-inputtext-sm"
+        maxlength="50"
+        pInputText
+      />
+    </div>
+    <div class="col-md-4">
+      <span class="form-title">Middle Name</span>
+      <input
+        placeholder=""
+        type="text"
+        formControlName="middleName"
+        class="p-inputtext-sm"
+        maxlength="50"
+        pInputText
+      />
+    </div>
+    <div class="col-md-4">
+      <span class="form-title ">Last Name</span>
+      <input
+        placeholder="Enter last name"
+        type="text"
+        formControlName="lastName"
+        class="p-inputtext-sm"
+        maxlength="50"
+        pInputText
+      />
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-4">
+      <span class="form-title required">Password</span>
+      <input
+        id="oldPassword"
+        maxlength="255"
+        type="Password"
+        placeholder="Enter your current password"
+        formControlName="password"
+        class="p-inputtext-sm"
+        autocomplete="new-password"
+        pInputText
+      />
+      <p class="position-relative">
+        <p-message
+          severity="error"
+          text="Password is required"
+          *ngIf="
+            userForm.get('password')?.hasError('required') &&
+            userForm.get('password')?.touched
+          "
+        >
+        </p-message>
+      </p>
+    </div>
+    <div class="col-md-4">
+      <span class="form-title required">New Password</span>
+      <input
+        id="newPassword"
+        maxlength="255"
+        type="Password"
+        placeholder="Enter the new password"
+        formControlName="newPassword"
+        class="p-inputtext-sm"
+        autocomplete="new-password"
+        pInputText
+      />
+      <p class="position-relative">
+        <p-message
+          severity="error"
+          text="This field is required"
+          *ngIf="
+            userForm.get('newPassword')?.hasError('required') &&
+            userForm.get('newPassword')?.touched
+          "
+        >
+        </p-message>
+      </p>
+    </div>
+    <div class="col-md-4">
+      <span class="form-title required">Confirm Password</span>
+      <input
+        id="newPasswordConfirm"
+        maxlength="255"
+        type="Password"
+        placeholder="Confirm your new password"
+        class="p-inputtext-sm"
+        formControlName="newPasswordConfirm"
+        autocomplete="new-password"
+        pInputText
+      />
+      <p class="position-relative">
+        <p-message
+          severity="error"
+          text="This field is required"
+          *ngIf="
+           userForm.get('newPasswordConfirm')?.hasError('required') &&
+           userForm.get('newPasswordConfirm')?.touched
+          "
+        >
+        </p-message>
+        <p-message
+        severity="error"
+        text="Please enter the same value again"
+        *ngIf="!this.passwordMatchValidator()"
+      >
+      </p-message>
+      </p>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-12 d-flex justify-content-end">
+
+      <button class="btn btn-primary" type="submit">
+        Change Password
+      </button>
+    </div>
+  </div>
+</form>

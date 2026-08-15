@@ -1,0 +1,261 @@
+<ng-template #content let-modal>
+  <div class="modal-header d-flex justify-content-center">
+    <h4 class="modal-title" id="user-modal">{{ this.title }}</h4>
+  </div>
+  <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+    <div class="modal-body">
+      <div class="mb-3">
+        <div class="row">
+          <div class="col-md-3">
+            <span
+              class="form-title"
+              [ngClass]="{ required: this.checkRequired('userName') }"
+              >User Name</span
+            >
+            <input
+              placeholder="Enter a username"
+              type="text"
+              formControlName="userName"
+              class="p-inputtext-sm"
+              maxlength="50"
+              pInputText
+            />
+          </div>
+
+          <div class="col-md-3">
+            <span
+              class="form-title"
+              [ngClass]="{ required: this.checkRequired('name') }"
+              >Name</span
+            >
+            <input
+              placeholder="Enter a name"
+              type="text"
+              formControlName="name"
+              class="p-inputtext-sm"
+              maxlength="50"
+              (input)="valueChanged()"
+              pInputText
+            />
+            <p class="position-relative">
+              <p-message
+                severity="error"
+                *ngIf="
+                  userForm.get('name')?.hasError('required') &&
+                  userForm.get('name')?.touched
+                "
+                text="Name is required"
+              >
+              </p-message>
+              <p-message
+                severity="error"
+                *ngIf="
+                  userForm.get('name')?.hasError('minlength') &&
+                  userForm.get('email')?.touched
+                "
+                text="Name must be at least 3 characters long"
+              >
+              </p-message>
+              <p-message
+                severity="error"
+                *ngIf="
+                  userForm.get('name')?.hasError('pattern') &&
+                  !userForm.get('name')?.hasError('minlength') &&
+                  userForm.get('email')?.touched
+                "
+                text="Name cannot contain digits"
+              >
+              </p-message>
+            </p>
+          </div>
+          <div class="col-md-3">
+            <span
+              class="form-title"
+              [ngClass]="{ required: this.checkRequired('middleName') }"
+              >Middle Name</span
+            >
+            <input
+              placeholder="Enter middle name"
+              type="text"
+              formControlName="middleName"
+              class="p-inputtext-sm"
+              maxlength="50"
+              (input)="valueChanged()"
+              pInputText
+            />
+          </div>
+          <div class="col-md-3">
+            <span
+              class="form-title"
+              [ngClass]="{ required: this.checkRequired('lastName') }"
+              >Last Name</span
+            >
+            <input
+              placeholder="Enter last name"
+              type="text"
+              formControlName="lastName"
+              class="p-inputtext-sm"
+              maxlength="50"
+              (input)="valueChanged()"
+              pInputText
+            />
+            <p class="position-relative">
+              <p-message
+                severity="error"
+                *ngIf="
+                  userForm.get('lastName')?.hasError('required') &&
+                  userForm.get('lastName')?.touched
+                "
+                text="Last Name is required"
+              >
+              </p-message>
+              <p-message
+                severity="error"
+                *ngIf="
+                  userForm.get('lastName')?.hasError('minlength') &&
+                  userForm.get('email')?.touched
+                "
+                text="Name must be at least 3 characters long"
+              >
+              </p-message>
+              <p-message
+                severity="error"
+                *ngIf="
+                  userForm.get('lastName')?.hasError('pattern') &&
+                  !userForm.get('lastName')?.hasError('minlength') &&
+                  userForm.get('email')?.touched
+                "
+                text="Name cannot contain digits"
+              >
+              </p-message>
+            </p>
+          </div>
+        </div>
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <span
+                class="form-title"
+                [ngClass]="{ required: this.checkRequired('email') }"
+                >Email</span
+              >
+              <input
+                placeholder="Enter email"
+                type="text"
+                formControlName="email"
+                class="p-inputtext-sm"
+                maxlength="100"
+                pInputText
+              />
+              <p class="position-relative">
+                <p-message
+                  severity="error"
+                  *ngIf="
+                    userForm.get('email')?.hasError('required') &&
+                    userForm.get('email')?.touched
+                  "
+                  text="Email is required"
+                >
+                </p-message>
+                <p-message
+                  severity="error"
+                  *ngIf="
+                    userForm.get('email')?.hasError('email') &&
+                    userForm.get('email')?.touched
+                  "
+                  text="Email is invalid"
+                >
+                </p-message>
+              </p>
+            </div>
+
+            <div class="col-md-3">
+              <span
+                class="form-title"
+                [ngClass]="{ required: this.checkRequired('userAct') }"
+                >Active Directory</span
+              >
+              <input
+                placeholder="Enter user name"
+                type="text"
+                formControlName="userAct"
+                class="p-inputtext-sm"
+                maxlength="50"
+                pInputText
+              />
+              <p class="position-relative">
+                <p-message
+                  severity="error"
+                  *ngIf="
+                    userForm.get('userAct')?.hasError('required') &&
+                    userForm.get('userAct')?.touched
+                  "
+                  text="AD User is required"
+                >
+                </p-message>
+              </p>
+            </div>
+
+            <!-- <div class="col-md-3">
+              <span class="form-title"  [ngClass]="{'required': this.checkRequired('enabled')}">Enabled</span>
+              <div>
+                <p-checkbox
+                  formControlName="enabled"
+                  [binary]="true"
+                  inputId="binary"
+                ></p-checkbox>
+              </div>
+            </div> -->
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <span
+                class="form-title"
+                [ngClass]="{ required: this.checkRequired('idPermission') }"
+                >Permission</span
+              >
+              <div class="d-flex justify-content-start gap-3">
+                <div *ngFor="let item of permissionList" class="field-checkbox">
+                  <p-radioButton
+                    [inputId]="item.id.toString()"
+                    name="idPermission"
+                    [value]="item.id"
+                    class="me-1"
+                    formControlName="idPermission"
+                  ></p-radioButton>
+                  <label [for]="item.id.toString()" class="ml-2">{{
+                    item.value
+                  }}</label>
+                </div>
+              </div>
+              <p class="position-relative">
+                <p-message
+                  severity="error"
+                  sticky="true"
+                  *ngIf="
+                    userForm.get('idPermission')?.hasError('required') &&
+                    userForm.get('idPermission')?.touched
+                  "
+                  text="Permission is required"
+                >
+                </p-message>
+              </p>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button [disabled]="isSubmitting" class="btn btn-primary" type="submit">
+        {{ this.title }}
+      </button>
+      <button
+        ngbAutofocus
+        type="button"
+        class="btn btn-secondary"
+        (click)="modal.close('Save click')"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</ng-template>

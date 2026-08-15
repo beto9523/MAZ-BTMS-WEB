@@ -1,0 +1,54 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+  <div class="sidebar-collapse">
+    <ul class="nav metismenu" id="side-menu" appMetisMenu>
+      <li class="nav-header menu-header">
+        <img src='{{ "assets/img/logo.png"}}' />
+      </li>
+      <!-- Ngfor menu -->
+      <li *ngFor="let item of menu" class="li-header li-mini">
+        <a
+          [ngClass]="{'li-actived': item.isActived}"
+          href="#"
+          class="menu-a"
+          (click)="item.isActived = !item.isActived; false; "
+          (click)="this.closeOthers(item.name);false;"
+          href="#"
+
+        >
+          <i [class]="item.icon"></i> <span class="nav-label">{{item.name}}</span><i [ngClass]="{'fa-caret-up': !item.isActived, 'fa-caret-down': item.isActived}" class="fa float-end"></i></a
+        >
+          <!-- Ngfor submenu navbar -->
+        <ul
+          class="nav ul-childs"
+          
+          *ngIf="item.isActived"
+          [@fadeInOut]="item.isActived ? 'visible' : 'hidden'"
+        >
+          <li *ngFor="let subItem of item.subMenu" class="li-header">
+            <a 
+              style="padding-left: 50px;"
+              [ngClass]="{'li-actived': item.isActived}"
+              class="menu-a"
+              routerLinkActive="active-route"
+              [routerLink]="subItem.path"
+              >{{subItem.name}}</a
+            >
+          </li>
+        </ul>
+         <!-- Ngfor submenu mini-navbar -->
+        <ul
+          class="nav ul-childs mini-navbar-childs"
+        >
+          <li *ngFor="let subItem of item.subMenu" class="li-header">
+            <a
+              class="menu-a menu-a-child"
+              routerLinkActive="active-route"
+              [routerLink]="subItem.path"
+              >{{subItem.name}}</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,43 @@
+#inputsize {
+  height: 30px !important;
+  border-radius: 7px !important;
+}
+
+.p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+  background: #ff001b;
+}
+.p-inputswitch {
+  transform: rotate(90deg);
+}
+.separator-left {
+  margin-right: 10px;
+  margin-top: 20px;
+}
+
+.labelseparator {
+  margin-left: 2%;
+}
+
+.divseparatormargintop {
+  margin-top: 20px;
+}
+.p-disabled {
+  background-color: #dddddd;
+  color: #696969;
+}
+.p-disabledbutton {
+  background-color: #dddddd !important;
+  border-color: #ffffff !important;
+  color: #696969;
+}
+
+.allignbuttons {
+  justify-content: left;
+  display: flex;
+  align-items: center;
+}
+
+.allignitems {
+  display: flex;
+  justify-content: center;
+}

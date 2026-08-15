@@ -1,0 +1,12 @@
+.ibox-title{
+  background-color: var(--primary-color);
+  padding: 10px;
+  min-height: 35px;
+}
+.ibox-title h5{
+  color: white;
+  font-family: InterBold;
+}
+.card-ibox{
+  min-height: 230px;
+}

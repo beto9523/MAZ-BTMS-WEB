@@ -1,0 +1,268 @@
+<ng-template #content let-modal >
+    <div class="modal-header d-flex justify-content-center">
+      <h4 class="modal-title" id="user-viewCert"> Edit Test  </h4>
+    </div>
+
+      <div class="modal-body"  >
+        <div class="mb-3">
+          <div class="row">
+            <form  [formGroup]="form" autocomplete="off"  >
+              <div class="row">
+                
+                <div class="col-md-3  "
+               
+
+                >
+                <span class="form-title"
+                [ngClass]="{ required: this.checkRequired('pwo') }"
+
+                >
+                PWO
+              
+              </span>
+                  <p-autoComplete
+                  class="p-inputtext-md"
+                  [suggestions]="this.pwoOptions"
+                  (change)="changePWOOption($event)"
+                  (onSelect)="onSelectPWO($event)"
+                  [forceSelection]="true"
+                  formControlName="pwo"
+                  placeholder="select PWO"
+                  [dropdown]="true"
+                  (completeMethod)="filterPWOOptions($event)"
+
+                  [style]="{ width: '100%', height: '37px', border: '10px' }"
+                > 
+                </p-autoComplete>
+               
+                  <p class="position-relative">
+                    <p-message
+                      severity="error"
+                      *ngIf="
+                        form.get('pwo')?.hasError('required') &&
+                        form.get('pwo')?.touched
+                      "
+                      text="PWO is required"
+                    >
+                    </p-message>
+                  </p>
+                </div>
+          
+                <div class="col-md-3  ">
+                  
+                  <span class="form-title"
+                  [ngClass]="{ required: this.checkRequired('ctrlType') }"
+
+                  >Serial </span>
+
+                  <p-autoComplete
+                    class="p-inputtext-md"
+                    [suggestions]="this.serialNumbers"
+                    [dropdown]="true"
+                    (change)="changeSerial($event)"
+                    (onSelect)="onSelectSerial($event)"
+                    [forceSelection]="true"
+                    placeholder="select serial #"
+                    (completeMethod)="filterSerialNumbers($event)"
+                    formControlName="ctrl_WO"
+                    [style]="{ width: '100%', height: '37px', border: '10px' }"
+                  >
+                  </p-autoComplete>
+                </div>
+                
+                <div class="col-sm-3 col align-self-start custom-disabled-input">
+                  <span class="form-title">Item</span>
+                  <input
+                    type="text"
+                    formControlName="item"
+                    id="inputsize"
+                    class="p-inputtext-sm"
+                    pInputText
+                    [ngClass]="{ 'p-disabled': true }"
+                    readonly
+                  />
+                </div>
+          
+                <div class="col-md-3">
+                  <span class="form-title">Cust PO</span>
+                  <input
+                    type="text"
+                    formControlName="custpo"
+                    id="inputsize"
+                    class="p-inputtext-sm"
+                    pInputText
+                    [ngClass]="{ 'p-disabled': true }"
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="form-title">Description</span>
+                  <input
+                    placeholder=""
+                    type="text"
+                    id="inputsize"
+                    formControlName="Description"
+                    class="p-inputtext-sm"
+                    pInputText
+                    [ngClass]="{ 'p-disabled': true }"
+                    readonly
+                  />
+                </div>
+              </div>
+          
+              <div class="row">
+                <div class="col-md-4">
+                  <span class="form-title col align-self-start">Operator</span>
+                  <input
+                    maxlength="255"
+                    type="text"
+                    formControlName="Operator"
+                    id="inputsize"
+                    class="p-inputtext-sm"
+                    [ngClass]="{ 'p-disabled': true }"
+                    readonly
+                    pInputText
+                  />
+                </div>
+                <div class="col-md-2">
+                  <span class="form-title">Chain</span>
+                  <input
+                    type="text"
+                    class="p-inputtext-sm"
+                    id="inputsize"
+                    maxlength="50"
+                    formControlName="chain"
+                    pInputText
+                    [ngClass]="{ 'p-disabled': true }"
+                    readonly
+                  />
+                </div>
+                <div class="col-md-2">
+                  <span class="form-title">Legs</span>
+                  <input
+                    type="text"
+                    class="p-inputtext-sm"
+                    id="inputsize"
+                    [ngClass]="{ 'p-disabled': true }"
+                    maxlength="50"
+                    formControlName="legs"
+                    pInputText
+                    readonly
+                  />
+                </div>
+                <div class="col-md-2">
+                  <span class="form-title">WLL</span>
+                  <input
+                    placeholder=""
+                    id="inputsize"
+                    [ngClass]="{ 'p-disabled': true }"
+                    type="text"
+                    id="inputsize"
+                    formControlName="wll"
+                    class="p-inputtext-sm"
+                    pInputText
+                    readonly
+                  />
+                </div>
+                <div class="col-md-2 col align-self-start required">
+                  <span
+                    class="form-title"
+                    [ngClass]="{ required: this.checkRequired('target') }"
+                    >Target</span
+                  >
+                  <input
+                    id="inputsize"
+                    placeholder=""
+                    type="text"
+                    formControlName="target"
+                    class="p-inputtext-sm"
+                    pInputText
+                  />
+          
+                  <p class="position-relative">
+                    <p-message
+                      severity="error"
+                      *ngIf="
+                        form.get('target')?.hasError('required') &&
+                        form.get('target')?.touched
+                      "
+                      text="Target is required"
+                    >
+                    </p-message>
+                  </p>
+                </div>
+              </div>
+             
+                <div class="row">
+                <div class="col-md-4">
+                    <label class="form-title "
+                    [ngClass]="{ required: this.checkRequired('ctrlType') }"
+
+                    >Type</label>
+                  
+                    <p-dropdown  
+                    [options]="Type" formControlName="ctrlType"
+                    placeholder=""
+                    autoWidth="false" [style]="{'width':'100%','vertical-align':'top','height':'40px'}"
+                    [ngClass]="{ required: this.checkRequired('ctrlType') }"
+ 
+                    >
+            
+                    </p-dropdown>
+            
+                  </div>
+            
+                  
+                  <div class="col-md-4">
+                    <label class="form-title " 
+                    [ngClass]="{ required: this.checkRequired('ctrlMethod') }"
+
+                    >Method</label>
+            
+                    <p-dropdown  
+                    [options]="Method" formControlName="ctrlMethod"
+                    
+                    autoWidth="false" [style]="{'width':'100%','vertical-align':'top','height':'40px'}"
+                     >
+            
+                    </p-dropdown>
+            
+                  </div>
+            
+                  <div class="col-md-4">
+                    <label for="" class="form-title"
+                    [ngClass]="{ required: this.checkRequired('ctrlMethod') }"
+                    >Geometry</label>
+                    <p-dropdown 
+                    inputId=""  
+                    [options]="Geometry" formControlName="ctrlGeometry"
+                    autoWidth="false" [style]="{'width':'100%','vertical-align':'top','height':'40px'}"
+                     >
+            
+                    </p-dropdown>
+                  </div>
+                </div>
+                 
+
+                </form>
+           </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" type="button" (click)="EditTest()">
+         Ok
+        </button>
+        
+        <button
+          ngbAutofocus
+          type="button"
+          class="btn btn-secondary"
+          (click)="modal.close('Save click')"
+        >
+          Cancel
+        </button>
+      </div>
+  </ng-template>
+  

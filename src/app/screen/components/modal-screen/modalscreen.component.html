@@ -1,0 +1,80 @@
+<ng-template #content let-modal>
+  <div class="modal-header d-flex justify-content-center">
+    <h4 class="modal-title" id="screen-modal">{{ this.title }}</h4>
+  </div>
+  <form [formGroup]="testForm">
+    <div class="modal-body">
+      <div class="mb-3">
+        <div class="row">
+          <div class="col-md-3">
+            <legend>Test Type</legend>
+            <div *ngFor="let item of testtype"
+            class="field-checkbox">
+              <br />
+              <p-radioButton
+              (click)="sendSelectedTesttype(item)"
+              [inputId]="item.id.toString()"
+                name="idTestType"
+                [value]="item.id"
+                formControlName="idTestType"
+              ></p-radioButton>
+              <label [for]="item.label" class="labelseparator">{{
+                item.value
+              }}</label
+              ><br />
+            </div>
+          </div>
+
+           <fieldset class="col-md-3">
+            <legend>Method</legend>
+            <div *ngFor="let item of method" class="field-checkbox">
+              <br /><p-radioButton
+              (click)="sendSelectedMethod(item)"
+                [inputId]="item.id.toString()"
+                name="idMethod"
+                formControlName="idMethod"
+                [value]="item.id"
+              ></p-radioButton>
+              <label class="labelseparator" [for]="item.label">{{ item.value }} </label
+              ><br />
+            </div>
+          </fieldset>
+
+           <fieldset class="col-md-3">
+            <legend>Geometry</legend>
+            <div *ngFor="let item of geometry" class="field-checkbox">
+              <br /><p-radioButton
+              [inputId]="item.id.toString()"
+              (click)="sendSelectedGeometry(item)"
+                name="idGeometry"
+                formControlName="idGeometry"
+                [value]="item.id"
+              ></p-radioButton>
+              <label class="labelseparator" [for]="item.value">{{
+                item.value
+              }}</label
+              ><br />
+            </div>
+          </fieldset>
+           <div class="col-sm-3" style="display: flex;" >
+            <a><img id="coconut" src="https://i.ibb.co/TtLzrVn/Dise-o-sin-t-tulo.png" alt="Dise-o-sin-t-tulo" border="0"></a>
+          </div> 
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal-footer"
+      (click)="modal.close('Save click')"
+     >
+      <button (click)="changeFlag()" class="btn btn-primary">OK</button>
+      <button
+        ngbAutofocus
+        type="button"
+        class="btn btn-secondary"
+          (click)="setFormValuesModal()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</ng-template>

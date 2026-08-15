@@ -1,0 +1,45 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "declaration": false,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "useDefineForClassFields": false,
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    "paths": {
+      "@Screen/*":[ "./src/app/screen/*"],
+      "@Services/*":[ "./src/app/core/services/*"],
+      "@InputModels/*":["./src/app/core/inputModels/*"],
+      "@ViewModels/*":["./src/app/core/viewModels/*"],
+      "@InternalModels/*":["./src/app/core/models/*"],
+      "@Utils/*":["./src/app/shared/utils/*"],
+      "@Libraries/*":["./src/app/core/libraries/*"],
+      "@Environments/*":["./src/environments/*"],
+      "@Responses/*":["./src/app/core/responses/*"],
+
+    }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

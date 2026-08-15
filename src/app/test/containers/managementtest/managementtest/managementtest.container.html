@@ -1,0 +1,37 @@
+<app-breadcrumb-header [title]="'Test Management'" ></app-breadcrumb-header>
+
+
+<div class="wrapper wrapper-content animated fadeInRight principalmenu">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                    </div>
+                    <app-filtrostest [showExport]="false" 
+                    (showTotales)="FilterTests($event)">
+                
+                </app-filtrostest>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+
+  <div class="wrapper wrapper-content animated fadeInRight principalmenu">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                    </div>
+                   <app-tabletestmanagement> </app-tabletestmanagement>
+
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

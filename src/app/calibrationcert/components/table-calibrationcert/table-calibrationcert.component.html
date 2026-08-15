@@ -1,0 +1,285 @@
+<form>
+    <div class="mb-3 row d-flex justify-content-between align-items-center">
+      <div class="col-auto d-flex align-items-center">
+        <span class="mx-2"> Show </span>
+        <select
+          class="form-select"
+          style="width: auto"
+          name="pageSize"
+          [(ngModel)]="service.pageSize"
+        >
+          <option [ngValue]="10">10</option>
+          <option [ngValue]="25">25</option>
+          <option [ngValue]="50">50</option>
+          <option [ngValue]="100">100</option>
+        </select>
+        <span class="mx-2"> entries </span>
+      </div>
+  
+      <div class="col-auto d-flex">
+        <label
+          for="table-complete-search"
+          class="col-xs-3 mx-2 col-sm-auto col-form-label"
+          >Search:</label
+        >
+        <div class="col-xs-3 col-sm-auto">
+          <input
+            id="table-complete-search"
+            type="text"
+            class="form-control"
+            name="searchTerm"
+            [(ngModel)]="service.searchTerm"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table
+        class="table table-striped table-condensed display responsive nowrap"
+      >
+        <thead>
+          <tr>
+            <th
+              class="td-center"
+              scope="col"
+              direction="asc"
+              sortable="id_cal_cer"
+              (sort)="onSort($event)"
+            >
+               Id
+            </th>
+        
+
+            <th
+              class="td-center"
+              scope="col"
+              sortable="wo_number"
+              (sort)="onSort($event)"
+            >
+            WO Number
+            </th>
+            <th
+              class="td-center"
+              scope="col"
+              sortable="serial_number"
+              (sort)="onSort($event)"
+            >
+            Serial Number
+            </th>
+            <th
+              class="td-center"
+              scope="col"
+              sortable="upload_by"
+              (sort)="onSort($event)"
+            >
+            Upload By
+            </th>
+         
+           
+            
+            <th
+            class="td-center"
+            scope="col"
+            sortable="location_name"
+            (sort)="onSort($event)"
+          >
+        Location
+          </th>
+          
+          <th
+          class="td-center"
+          scope="col"
+          sortable="test_machine_desc"
+          (sort)="onSort($event)"
+        >
+ Machine 
+
+</th>
+
+
+    
+
+            <th
+            class="td-center"
+            scope="col"
+            sortable="certificate_date"
+            (sort)="onSort($event)"
+          >
+Certificate Date
+        </th>
+
+          <th
+          class="td-center"
+          scope="col"
+          sortable="upload_date"
+          (sort)="onSort($event)"
+        >
+Upload Date
+        </th>
+
+        <th
+        class="td-center"
+        scope="col"
+        sortable="valid_from"
+        (sort)="onSort($event)"
+      >Valid From
+      </th>
+      <th
+      class="td-center"
+      scope="col"
+      sortable="valid_to"
+      (sort)="onSort($event)"
+    >
+Valid To
+    </th>
+
+            <th class="td-center" class="actions" scope="col">Action</th>
+          </tr>
+        </thead>
+  
+        @if (service.loading$ | async) {
+        <tbody class="child-vertical">
+          <tr>
+            <td colspan="11" class="text-center truncate">
+              <div class="d-flex justify-content-center align-items-center">
+                <div class="spinner-border col-12" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        } @else {
+        <tbody>
+          @for (data of data$ | async; track data.id) {
+          <tr>
+            <td class="td-center" scope="row" >
+              <ngb-highlight
+                [result]="data.id"
+                [term]="service.searchTerm"
+              />
+            </td>
+    
+            
+            <td class="td-center" scope="row" >
+              <ngb-highlight
+                [result]="data.woNumber"
+                [term]="service.searchTerm"
+              />
+            </td>
+            <td class="td-center" scope="row" >
+              <ngb-highlight
+                [result]="data.serialNumber"
+                [term]="service.searchTerm"
+              />
+             
+
+            </td>
+
+
+
+
+
+
+            <td class="td-center" scope="row" >
+              <ngb-highlight
+                [result]="data.uploadBy"
+                [term]="service.searchTerm"
+              />
+            </td>
+            <td class="td-center" scope="row">
+              <ngb-highlight
+                [result]="data.locationMachine"
+                [term]="service.searchTerm"
+              />
+            </td>
+            <td class="td-center" scope="row" >
+              <ngb-highlight
+                [result]="data.testMachineDesc"
+                [term]="service.searchTerm"
+              />
+            </td>
+           
+          
+            <td class="td-center" scope="row"
+            
+            >
+            
+              <ngb-highlight 
+                [result]="data.certificateDate|fechaFormat:5"
+                [term]="service.searchTerm"
+              />
+            </td>
+
+            <td class="td-center" scope="row" style="width:fit-content;" >
+              <ngb-highlight
+                [result]="data.uploadDate|fechaFormat:5"
+                [term]="service.searchTerm"
+              />
+            </td>
+
+            <td class="td-center" scope="row">
+              <ngb-highlight
+                [result]="data.validFrom|fechaFormat:5"
+                [term]="service.searchTerm"
+              />
+            </td>
+            <td class="td-center" scope="row"  >
+              <ngb-highlight
+                [result]="data.validTo|fechaFormat:5"
+                [term]="service.searchTerm"
+              />
+            </td>
+  
+            <td class="actions" scope="row">
+              
+                <button class="btn-white btn btn-xs" (click)="openEdit(data.id) "style="margin-right:5px" >
+                  Edit
+                </button>
+              
+              <button class="btn-white btn btn-xs" (click)="editCertFile(data.id)" >
+                Upload
+              </button>
+              <div style="display: none;">
+
+              <input type="file" [id]="'file-'+data.id"  accept="application/pdf" (change)="onSelectFile($event, data.id)" />
+              
+              </div>
+            </td>
+          </tr>
+          } @empty {
+          <tr>
+            <td colspan="10" style="text-align: center">No data found</td>
+          </tr>
+          }
+        </tbody>
+        }
+      </table>
+    </div>
+    <div class="mb-3 row d-flex justify-content-between">
+      <div class="col-auto d-flex">
+        <span
+          >Showing {{ (pagL$ | async)! }} to {{ (pagR$ | async)! }} of
+          {{ (total$ | async)! }} entries</span
+        >
+      </div>
+  
+      <div class="col-auto d-flex">
+        <ngb-pagination
+          [collectionSize]="(total$ | async)!"
+          [(page)]="service.page"
+          [pageSize]="service.pageSize"
+          [boundaryLinks]="false"
+          [maxSize]="5"
+        >
+          <ng-template ngbPaginationPrevious>
+            <span class="pagination-text">Previous</span>
+          </ng-template>
+          <ng-template ngbPaginationNext>
+            <span class="pagination-text">Next</span>
+          </ng-template>
+        </ngb-pagination>
+      </div>
+    </div>
+  </form>
+  <app-modal-calibrationcert (reloadTable)="reloadTable()" ></app-modal-calibrationcert>

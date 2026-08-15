@@ -1,0 +1,13 @@
+.logo{
+  width: 230px;
+}
+input{
+  width: 100%;
+}
+
+
+ .p-message {
+  position: absolute  !important;
+  bottom: -25px !important; /* Ajusta esta posición según sea necesario */
+  left: 0 !important;
+}
