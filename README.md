@@ -3,9 +3,10 @@
 -TypeScript
 -PrimeNg
 -Boostrap
+-SQL server
 
-# Contexto
-Este proyecto se creo desde 0 . pide ordenes de trabajo (Identificadas como WorkOrder o PWO en el codigo) que posteriormente guarda en la base de datos y  las cuales serviran pueden hacer tests de calibracion para maquinaria industrial
+# Contexto y Aclaraciones
+Este proyecto se creo desde 0 . pide ordenes de trabajo (Identificadas como WorkOrder o PWO en el codigo) que posteriormente guarda en la base de datos y  las cuales serviran pueden hacer tests de calibracion para maquinaria industrial. las llamadas se hacen atravez de los servicios ubicados en src/app/core/services . hay otro proyecto para el backend pues este es solo para el front
 # WEB 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.9.
