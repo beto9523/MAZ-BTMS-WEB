@@ -1,4 +1,12 @@
-# WEB MAZZELLA
+# STACK
+-Angular 
+-TypeScript
+-PrimeNg
+-Boostrap
+
+# Contexto
+Este proyecto se creo desde 0 . pide ordenes de trabajo (Identificadas como WorkOrder o PWO en el codigo) que posteriormente guarda en la base de datos y  las cuales serviran pueden hacer tests de calibracion para maquinaria industrial
+# WEB 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.9.
 
